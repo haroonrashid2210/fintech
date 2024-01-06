@@ -12,6 +12,10 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
     return (await this.model.create(document)).toJSON() as unknown as TDocument;
   }
 
+  async count(filterQuery: FilterQuery<TDocument>): Promise<number> {
+    return await this.model.countDocuments(filterQuery);
+  }
+
   async findOne(filterQuery: FilterQuery<TDocument>): Promise<TDocument> {
     return (await this.model.findOne(filterQuery, {}, { lean: true })) as unknown as TDocument;
   }
@@ -38,8 +42,11 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
   }
 
   async deleteMany(filterQuery: FilterQuery<TDocument>): Promise<TDocument[]> {
-    return (await this.model.deleteMany(filterQuery, {
-      lean: true,
-    })) as unknown as TDocument[];
+    return (await this.model.deleteMany(filterQuery)) as unknown as TDocument[];
+  }
+
+  async insertMany(filterQuery: FilterQuery<TDocument>): Promise<TDocument[]> {
+    const insertedDocuments = await this.model.insertMany(filterQuery);
+    return insertedDocuments as unknown as TDocument[];
   }
 }
