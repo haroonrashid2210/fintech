@@ -16,6 +16,10 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
     return (await this.model.findOne(filterQuery, {}, { lean: true })) as unknown as TDocument;
   }
 
+  async updateOne(filterQuery: FilterQuery<TDocument>, update: UpdateQuery<TDocument>): Promise<boolean> {
+    return !!(await this.model.updateOne(filterQuery, update));
+  }
+
   async findOneAndUpdate(filterQuery: FilterQuery<TDocument>, update: UpdateQuery<TDocument>): Promise<TDocument> {
     return (await this.model.findOneAndUpdate(filterQuery, update, {
       new: true,
