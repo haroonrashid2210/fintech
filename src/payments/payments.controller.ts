@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { CurrentUser, IUser } from '@app/common';
@@ -12,5 +12,10 @@ export class PaymentsController {
   @Post()
   create(@CurrentUser() user: IUser, @Body() createPaymentDto: CreatePaymentDto) {
     return this.paymentsService.create(user, createPaymentDto);
+  }
+
+  @Get()
+  findAll(@CurrentUser() user: IUser) {
+    return this.paymentsService.findAll(user);
   }
 }

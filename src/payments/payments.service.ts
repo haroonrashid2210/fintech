@@ -14,6 +14,16 @@ export class PaymentsService {
     private readonly bookingService: BookingsService,
   ) {}
 
+  /**
+   * The create function creates a payment record and updates the status of a booking to "BOOKED".
+   * @param {IUser} user - The "user" parameter is an object of type IUser, which represents the user
+   * who is creating the payment. It likely contains information about the user, such as their ID,
+   * name, email, etc.
+   * @param {CreatePaymentDto} createPaymentDto - The `createPaymentDto` parameter is an object that
+   * contains the data needed to create a payment. It likely includes properties such as the payment
+   * amount, payment method, and any other relevant payment details.
+   * @returns The `payment` object is being returned.
+   */
   async create(user: IUser, createPaymentDto: CreatePaymentDto) {
     const payment = await this.paymentModel.create({ ...createPaymentDto, userId: user._id });
     await this.bookingService.updateOne(
@@ -21,5 +31,14 @@ export class PaymentsService {
       { $set: { status: EBookingStatus.BOOKED } },
     );
     return payment;
+  }
+
+  /**
+   * The `findAll` function retrieves all payments associated with a given user.
+   * @param {IUser} user - The `user` parameter is an object of type `IUser`.
+   * @returns a promise that resolves to an array of payment documents that match the given user's ID.
+   */
+  async findAll(user: IUser) {
+    return await this.paymentModel.find({ userId: user._id });
   }
 }
