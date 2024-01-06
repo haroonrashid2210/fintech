@@ -1,16 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { CreateServiceDto } from './dto/create-service.dto';
-import { UpdateServiceDto } from './dto/update-service.dto';
-import { FilterQuery } from 'mongoose';
+import mongoose, { FilterQuery } from 'mongoose';
 import { Merchant } from 'src/merchants/schemas';
 import { ServicesRepository } from './services.repository';
 import { Service } from './schemas';
+import { ReviewsService } from 'src/reviews/reviews.service';
 
 @Injectable()
 export class ServicesService {
-  constructor(private readonly servicesRepository: ServicesRepository) {}
-  create(createServiceDto: CreateServiceDto) {
-    return 'This action adds a new service';
+  constructor(
+    private readonly servicesRepository: ServicesRepository,
+    private readonly reviewsService: ReviewsService,
+  ) {}
+
+  async findServiceReviews(id: string) {
+    return await this.reviewsService.findAll({ serviceId: new mongoose.Types.ObjectId(id) });
   }
 
   async findAll(filterQuery: FilterQuery<Service>) {
@@ -19,14 +22,6 @@ export class ServicesService {
 
   async findOne(id: string) {
     return await this.servicesRepository.findOne({ _id: id });
-  }
-
-  update(id: number, updateServiceDto: UpdateServiceDto) {
-    return `This action updates a #${id} service`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} service`;
   }
 
   async insertMany(filterQuery: FilterQuery<Merchant>): Promise<Merchant[]> {

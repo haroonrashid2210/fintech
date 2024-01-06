@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBookingDto } from './dto/create-booking.dto';
-import { UpdateBookingDto } from './dto/update-booking.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Booking } from './schemas';
 import { FilterQuery, Model, UpdateQuery } from 'mongoose';
@@ -24,9 +23,5 @@ export class BookingsService {
 
   async updateOne(filter: FilterQuery<Booking>, update: UpdateQuery<Booking>) {
     return await this.bookingModel.updateOne(filter, update);
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} booking`;
   }
 }

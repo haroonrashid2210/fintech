@@ -9,5 +9,6 @@ import { BookingsModule } from 'src/bookings/bookings.module';
   imports: [DatabaseModule.forFeature([{ name: Review.name, schema: ReviewSchema }]), BookingsModule],
   controllers: [ReviewsController],
   providers: [ReviewsService],
+  exports: [ReviewsService],
 })
 export class ReviewsModule {}

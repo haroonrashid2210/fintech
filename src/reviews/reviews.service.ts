@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateReviewDto } from './dto/create-review.dto';
-import { UpdateReviewDto } from './dto/update-review.dto';
 import { IUser } from '@app/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Review } from './schemas';
@@ -29,19 +28,11 @@ export class ReviewsService {
     return await this.reviewModel.create({ ...createReviewDto, userId: user._id });
   }
 
-  findAll() {
-    return `This action returns all reviews`;
+  async findAll(filter: FilterQuery<Review>) {
+    return await this.reviewModel.find(filter);
   }
 
   async findOne(filter: FilterQuery<Review>) {
     return await this.reviewModel.updateOne(filter);
-  }
-
-  update(id: number, updateReviewDto: UpdateReviewDto) {
-    return `This action updates a #${id} review`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} review`;
   }
 }
