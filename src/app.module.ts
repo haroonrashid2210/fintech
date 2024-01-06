@@ -5,9 +5,12 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { MerchantsModule } from './merchants/merchants.module';
 import { ServicesModule } from './services/services.module';
+import { BookingsModule } from './bookings/bookings.module';
+import { PaymentsModule } from './payments/payments.module';
+import { ReviewsModule } from './reviews/reviews.module';
 
 @Module({
-  imports: [UsersModule, AuthModule, MerchantsModule, ServicesModule],
+  imports: [UsersModule, AuthModule, MerchantsModule, ServicesModule, BookingsModule, PaymentsModule, ReviewsModule],
   controllers: [AppController],
   providers: [AppService],
 })
