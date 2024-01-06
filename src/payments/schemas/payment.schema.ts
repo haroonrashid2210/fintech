@@ -14,7 +14,7 @@ export class Payment extends AbstractDocument {
   @Prop({ type: Types.ObjectId, ref: Booking.name })
   bookingId: string | Types.ObjectId;
 
-  @Prop({ type: EPaymentMethod })
+  @Prop({ type: String, enum: EPaymentMethod })
   method: EPaymentMethod;
 
   @Prop({ type: Number })

@@ -1,23 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateBookingDto } from './dto/update-booking.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Booking } from './schemas';
+import { FilterQuery, Model, UpdateQuery } from 'mongoose';
+import { IUser } from '@app/common';
 
 @Injectable()
 export class BookingsService {
-  create(createBookingDto: CreateBookingDto) {
-    return 'This action adds a new booking';
+  constructor(@InjectModel(Booking.name) private readonly bookingModel: Model<Booking>) {}
+
+  async create(user: IUser, createBookingDto: CreateBookingDto) {
+    return await this.bookingModel.create({ ...createBookingDto, userId: user._id });
   }
 
   findAll() {
     return `This action returns all bookings`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} booking`;
+  async findOne(filter: FilterQuery<Booking>) {
+    return await this.bookingModel.findOne(filter);
   }
 
-  update(id: number, updateBookingDto: UpdateBookingDto) {
-    return `This action updates a #${id} booking`;
+  async updateOne(filter: FilterQuery<Booking>, update: UpdateQuery<Booking>) {
+    return await this.bookingModel.updateOne(filter, update);
   }
 
   remove(id: number) {

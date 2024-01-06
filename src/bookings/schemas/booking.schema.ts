@@ -14,7 +14,7 @@ export class Booking extends AbstractDocument {
   @Prop({ type: Types.ObjectId, ref: Service.name })
   serviceId: string | Types.ObjectId;
 
-  @Prop({ type: EBookingStatus, default: EBookingStatus.PENDING })
+  @Prop({ type: String, enum: EBookingStatus, default: EBookingStatus.PENDING })
   status: EBookingStatus;
 }
 
