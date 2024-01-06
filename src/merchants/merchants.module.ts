@@ -3,7 +3,7 @@ import { MerchantsService } from './merchants.service';
 import { MerchantsController } from './merchants.controller';
 import { DatabaseModule } from '@app/common';
 import { Merchant, MerchantSchema } from './schemas';
-import { ServicesModule } from 'src/services/services.module';
+import { ServicesModule } from '../../src/services/services.module';
 
 @Module({
   imports: [

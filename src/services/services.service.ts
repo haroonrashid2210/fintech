@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import mongoose, { FilterQuery, Model } from 'mongoose';
-import { Merchant } from 'src/merchants/schemas';
+import { Merchant } from '../../src/merchants/schemas';
 import { Service } from './schemas';
-import { ReviewsService } from 'src/reviews/reviews.service';
+import { ReviewsService } from '../../src/reviews/reviews.service';
 import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()

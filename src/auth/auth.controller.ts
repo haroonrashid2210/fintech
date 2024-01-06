@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { Response } from 'express';
 import { CurrentUser } from '@app/common';
-import { User } from 'src/users/schemas';
+import { User } from '../../src/users/schemas';
 import { RegisterDto, VerifyEmailDto } from './dto';
 
 @Controller('auth')

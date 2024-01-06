@@ -2,7 +2,7 @@ import { Controller, Post, Body, UseGuards, Get } from '@nestjs/common';
 import { BookingsService } from './bookings.service';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { CurrentUser, IUser } from '@app/common';
-import { JwtAuthGuard } from 'src/auth/guards';
+import { JwtAuthGuard } from '../../src/auth/guards';
 
 @Controller('bookings')
 @UseGuards(JwtAuthGuard)

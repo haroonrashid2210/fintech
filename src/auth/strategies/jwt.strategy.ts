@@ -4,7 +4,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Request } from 'express';
 import { ENV } from '@app/common';
 import { ITokenPayload } from '../interfaces/token-payload.interface';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../../../src/users/users.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {

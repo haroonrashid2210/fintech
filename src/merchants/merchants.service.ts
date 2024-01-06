@@ -1,8 +1,8 @@
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
-import { MERCHANTS_DATA } from 'data';
+import { MERCHANTS_DATA } from '../../data';
 import { utils } from '@app/common';
-import { Service } from 'src/services/schemas';
-import { ServicesService } from 'src/services/services.service';
+import { Service } from '../../src/services/schemas';
+import { ServicesService } from '../../src/services/services.service';
 import mongoose, { Model } from 'mongoose';
 import { Merchant } from './schemas';
 import { InjectModel } from '@nestjs/mongoose';

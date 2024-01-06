@@ -2,8 +2,8 @@ import { Schema } from '@app/common';
 import { AbstractDocument } from '@app/common/database/abstract.schema';
 import { Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Types } from 'mongoose';
-import { Service } from 'src/services/schemas';
-import { User } from 'src/users/schemas';
+import { Service } from '../../../src/services/schemas';
+import { User } from '../../../src/users/schemas';
 import { EBookingStatus } from '../enums';
 
 @Schema()

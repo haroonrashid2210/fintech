@@ -2,9 +2,9 @@ import { Schema } from '@app/common';
 import { AbstractDocument } from '@app/common/database/abstract.schema';
 import { Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Types } from 'mongoose';
-import { User } from 'src/users/schemas';
+import { User } from '../../../src/users/schemas';
 import { EPaymentMethod } from '../enums';
-import { Booking } from 'src/bookings/schemas';
+import { Booking } from '../../../src/bookings/schemas';
 
 @Schema()
 export class Payment extends AbstractDocument {

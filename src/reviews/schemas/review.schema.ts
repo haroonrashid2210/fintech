@@ -2,8 +2,8 @@ import { Schema } from '@app/common';
 import { AbstractDocument } from '@app/common/database/abstract.schema';
 import { Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Types } from 'mongoose';
-import { User } from 'src/users/schemas';
-import { Booking } from 'src/bookings/schemas';
+import { User } from '../../../src/users/schemas';
+import { Booking } from '../../../src/bookings/schemas';
 
 @Schema()
 export class Review extends AbstractDocument {

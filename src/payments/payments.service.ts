@@ -4,8 +4,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Payment } from './schemas';
 import { Model } from 'mongoose';
 import { IUser } from '@app/common';
-import { BookingsService } from 'src/bookings/bookings.service';
-import { EBookingStatus } from 'src/bookings/enums';
+import { BookingsService } from '../../src/bookings/bookings.service';
+import { EBookingStatus } from '../../src/bookings/enums';
 
 @Injectable()
 export class PaymentsService {

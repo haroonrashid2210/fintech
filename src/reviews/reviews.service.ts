@@ -4,8 +4,8 @@ import { IUser } from '@app/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Review } from './schemas';
 import { FilterQuery, Model } from 'mongoose';
-import { BookingsService } from 'src/bookings/bookings.service';
-import { EBookingStatus } from 'src/bookings/enums';
+import { BookingsService } from '../../src/bookings/bookings.service';
+import { EBookingStatus } from '../../src/bookings/enums';
 
 @Injectable()
 export class ReviewsService {

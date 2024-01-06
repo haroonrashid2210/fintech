@@ -3,9 +3,9 @@ import { Response } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { ENV, utils } from '@app/common';
 import { ITokenPayload } from './interfaces/token-payload.interface';
-import { User } from 'src/users/schemas';
+import { User } from '../../src/users/schemas';
 import { RegisterDto } from './dto/register.dto';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../../src/users/users.service';
 import { VerifyEmailDto } from './dto';
 
 @Injectable()

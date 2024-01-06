@@ -1,7 +1,7 @@
 import { Controller, Post, Body, UseGuards, Get } from '@nestjs/common';
 import { ReviewsService } from './reviews.service';
 import { CreateReviewDto } from './dto/create-review.dto';
-import { JwtAuthGuard } from 'src/auth/guards';
+import { JwtAuthGuard } from '../../src/auth/guards';
 import { CurrentUser, IUser } from '@app/common';
 
 @Controller('reviews')

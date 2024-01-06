@@ -5,7 +5,7 @@ import { ENV } from '@app/common';
 import { JwtModule } from '@nestjs/jwt';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { UsersModule } from 'src/users/users.module';
+import { UsersModule } from '../../src/users/users.module';
 
 @Module({
   imports: [
