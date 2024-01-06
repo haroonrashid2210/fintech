@@ -1,5 +1,4 @@
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
-import { MerchantsRepository } from './merchants.repository';
 import { MERCHANTS_DATA } from 'data';
 import { utils } from '@app/common';
 import { Service } from 'src/services/schemas';
@@ -12,7 +11,6 @@ import { InjectModel } from '@nestjs/mongoose';
 export class MerchantsService implements OnApplicationBootstrap {
   constructor(
     @InjectModel(Merchant.name) private readonly merchantModel: Model<Merchant>,
-    private readonly merchantsRepository: MerchantsRepository,
     private readonly servicesService: ServicesService,
   ) {}
 
@@ -21,10 +19,10 @@ export class MerchantsService implements OnApplicationBootstrap {
   }
 
   async seed() {
-    const merchantsCount = await this.merchantsRepository.count({});
+    const merchantsCount = await this.merchantModel.countDocuments({});
     if (merchantsCount) return;
 
-    const insertedMerchants = await this.merchantsRepository.insertMany(MERCHANTS_DATA);
+    const insertedMerchants = await this.merchantModel.insertMany(MERCHANTS_DATA);
 
     for (let i = 0; i < insertedMerchants.length; i++) {
       const services: Omit<Service, '_id' | 'createdAt' | 'updatedAt'>[] = [];
@@ -42,11 +40,11 @@ export class MerchantsService implements OnApplicationBootstrap {
   }
 
   async findAll() {
-    return await this.merchantsRepository.find({});
+    return await this.merchantModel.find({});
   }
 
   async findById(_id: string) {
-    return await this.merchantsRepository.findOne({ _id });
+    return await this.merchantModel.findOne({ _id });
   }
 
   async findMerchantServices(_id: string) {

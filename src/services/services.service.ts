@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import mongoose, { FilterQuery } from 'mongoose';
+import mongoose, { FilterQuery, Model } from 'mongoose';
 import { Merchant } from 'src/merchants/schemas';
-import { ServicesRepository } from './services.repository';
 import { Service } from './schemas';
 import { ReviewsService } from 'src/reviews/reviews.service';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class ServicesService {
   constructor(
-    private readonly servicesRepository: ServicesRepository,
+    @InjectModel(Service.name) private readonly serviceModel: Model<Service>,
     private readonly reviewsService: ReviewsService,
   ) {}
 
@@ -17,15 +17,15 @@ export class ServicesService {
   }
 
   async findAll(filterQuery: FilterQuery<Service>) {
-    return await this.servicesRepository.find(filterQuery);
+    return await this.serviceModel.find(filterQuery);
   }
 
   async findOne(id: string) {
-    return await this.servicesRepository.findOne({ _id: id });
+    return await this.serviceModel.findOne({ _id: id });
   }
 
   async insertMany(filterQuery: FilterQuery<Merchant>): Promise<Merchant[]> {
-    const insertedDocuments = await this.servicesRepository.insertMany(filterQuery);
+    const insertedDocuments = await this.serviceModel.insertMany(filterQuery);
     return insertedDocuments as unknown as Merchant[];
   }
 }

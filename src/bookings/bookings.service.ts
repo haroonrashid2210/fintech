@@ -13,10 +13,6 @@ export class BookingsService {
     return await this.bookingModel.create({ ...createBookingDto, userId: user._id });
   }
 
-  findAll() {
-    return `This action returns all bookings`;
-  }
-
   async findOne(filter: FilterQuery<Booking>) {
     return await this.bookingModel.findOne(filter);
   }
