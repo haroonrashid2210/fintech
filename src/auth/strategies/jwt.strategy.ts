@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Request } from 'express';
@@ -15,7 +15,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate({ userId }: ITokenPayload) {
-    return await this.userService.findOne({ _id: userId });
+  async validate(token: ITokenPayload) {
+    const user = await this.userService.findOne({ _id: token.userId });
+    if (new Date(token.createdAt).getMilliseconds() < new Date(user.lastLoginAt).getMilliseconds()) {
+      throw new UnauthorizedException('Session expired');
+    }
+    return user;
   }
 }
