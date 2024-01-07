@@ -17,7 +17,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(token: ITokenPayload) {
     const user = await this.userService.findOne({ _id: token.userId });
-    if (new Date(token.createdAt).getMilliseconds() < new Date(user.lastLoginAt).getMilliseconds()) {
+   
+    if (new Date(token.createdAt) < new Date(user.lastLoginAt)) {
       throw new UnauthorizedException('Session expired');
     }
     return user;

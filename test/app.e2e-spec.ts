@@ -152,6 +152,26 @@ describe('e2e Testing', () => {
         DATA.cookie = response.headers['set-cookie']?.[0] as any;
       });
     });
+
+    describe('/auth/login', () => {
+      const oldCookie = DATA.cookie;
+
+      beforeAll(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+
+        const response = await request(app.getHttpServer()).post('/auth/login').send({
+          email: DATA.email.valid,
+          password: DATA.password.valid,
+        });
+
+        DATA.cookie = response.headers['set-cookie']?.[0] as any;
+      });
+
+      it('should not allow multiple sessions', async () => {
+        const response = await request(app.getHttpServer()).get('/merchants').set('Cookie', oldCookie).send();
+        expect(response.statusCode).toEqual(401);
+      });
+    });
   });
 
   describe('Merchants', () => {
@@ -207,7 +227,6 @@ describe('e2e Testing', () => {
         .send({ bookingId: DATA.bookingId, method: EPaymentMethod.CARD });
 
       expect(response.statusCode).toEqual(201);
-      console.log('response.statusCode: ', response.body);
     });
 
     it('booking status should be booked', async () => {
